@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Internships</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+</head>
+
+<body class="bg-light">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark bg-primary">
+
+        <div class="container">
+
+            <a class="navbar-brand fw-bold"
+               href="{% url 'company_dashboard' %}">
+                Smart Internship Portal
+            </a>
+
+            <a class="btn btn-light"
+               href="{% url 'company_dashboard' %}">
+                Dashboard
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- Main Content -->
+    <div class="container mt-5 mb-5">
+
+        <!-- Heading -->
+        <div class="text-center mb-5">
+
+            <h1 class="fw-bold">
+                📋 My Internships
+            </h1>
+
+            <p class="text-muted">
+                Manage the internships posted by your company.
+            </p>
+
+        </div>
+
+
+        {% if internships %}
+
+            <!-- Internship Cards -->
+            <div class="row g-4">
+
+                {% for internship in internships %}
+
+                    <div class="col-md-6 col-lg-4">
+
+                        <div class="card h-100 shadow-sm border-0">
+
+                            <div class="card-body d-flex flex-column">
+
+                                <!-- Title -->
+                                <h4 class="card-title fw-bold mb-3">
+                                    {{ internship.title }}
+                                </h4>
+
+
+                                <!-- Location -->
+                                <p class="mb-2">
+                                    <strong>📍 Location:</strong>
+                                    {{ internship.location }}
+                                </p>
+
+
+                                <!-- Duration -->
+                                <p class="mb-2">
+                                    <strong>⏳ Duration:</strong>
+                                    {{ internship.duration }}
+                                </p>
+
+
+                                <!-- Stipend -->
+                                <p class="mb-2">
+                                    <strong>💰 Stipend:</strong>
+                                    {{ internship.stipend }}
+                                </p>
+
+
+                                <!-- Deadline -->
+                                <p class="mb-2">
+                                    <strong>📅 Deadline:</strong>
+                                    {{ internship.application_deadline }}
+                                </p>
+
+
+                                <!-- Required Skills -->
+                                <p class="mb-3">
+                                    <strong>🛠 Required Skills:</strong>
+                                    {{ internship.required_skills }}
+                                </p>
+
+
+                                <!-- Description -->
+                                <p class="text-muted">
+                                    {{ internship.description }}
+                                </p>
+
+
+                                <!-- View Applications -->
+                                <div class="mt-auto pt-3">
+
+                                    <a
+                                        href="{% url 'company_applications' internship.id %}"
+                                        class="btn btn-primary w-100">
+
+                                        👥 View Applications
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+        {% else %}
+
+            <!-- No Internships -->
+            <div class="card shadow-sm border-0">
+
+                <div class="card-body text-center p-5">
+
+                    <div class="display-4 mb-3">
+                        📭
+                    </div>
+
+                    <h3 class="fw-bold">
+                        No Internships Yet
+                    </h3>
+
+                    <p class="text-muted">
+                        You have not posted any internships yet.
+                    </p>
+
+                    <a
+                        href="{% url 'post_internship' %}"
+                        class="btn btn-primary">
+
+                        ➕ Post New Internship
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        {% endif %}
+
+
+        <!-- Bottom Buttons -->
+        <div class="text-center mt-5">
+
+            <a
+                href="{% url 'post_internship' %}"
+                class="btn btn-success me-2">
+
+                ➕ Post New Internship
+
+            </a>
+
+            <a
+                href="{% url 'company_dashboard' %}"
+                class="btn btn-outline-dark">
+
+                🏠 Dashboard
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- Bootstrap JS -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+</body>
+
+</html>
